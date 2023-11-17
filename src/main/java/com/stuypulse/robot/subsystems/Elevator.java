@@ -15,6 +15,7 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static com.stuypulse.robot.constants.Settings.Elevator.*;
 import static com.stuypulse.robot.constants.Settings.Elevator.Encoder.*;
@@ -22,7 +23,7 @@ import static com.stuypulse.robot.constants.Settings.PID.*;
 
 import static com.stuypulse.robot.constants.Settings.FeedForward.*;
 
-public class Elevator {
+public class Elevator extends SubsystemBase {
     // hardware
     public CANSparkMax leftMotor;
     public CANSparkMax rightMotor;
@@ -102,6 +103,14 @@ public class Elevator {
 
         rightMotor.setVoltage(voltage);
         leftMotor.setVoltage(voltage);
+    }
+
+    public final boolean isReady(double error) {
+        return Math.abs(getTargetHeight() - getHeight()) < error;
+    }
+
+    public void addTargetHeight(double delta) {
+        setTargetHeight(getTargetHeight() + delta);
     }
 
     public void periodic() {
