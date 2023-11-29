@@ -7,9 +7,11 @@ package com.stuypulse.robot;
 
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.util.ElevatorVisualizer;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,6 +23,7 @@ public class RobotContainer {
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
     
     // Subsystem
+    ElevatorVisualizer elevator = new ElevatorVisualizer();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -53,6 +56,7 @@ public class RobotContainer {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
 
         SmartDashboard.putData("Autonomous", autonChooser);
+        // SmartDashboard.putData("elevator", elevator);
     }
 
     public Command getAutonomousCommand() {

@@ -1,0 +1,30 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/SmartDashboard/Autonomous": "String Chooser",
+      "/SmartDashboard/Elevator": "Mechanism2d"
+    },
+    "windows": {
+      "/SmartDashboard/Elevator": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "SmartDashboard": {
+        "Elevator": {
+          "left root": {
+            "open": true
+          },
+          "open": true
+        },
+        "open": true
+      }
+    }
+  }
+}

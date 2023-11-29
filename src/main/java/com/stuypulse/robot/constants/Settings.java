@@ -18,6 +18,8 @@ public interface Settings {
         double MIN_HEIGHT = 0.0;
         double MAX_HEIGHT = 0.0;
 
+        double MAX_HEIGHT_ERROR = 0.0;
+
         SmartNumber VEL_LIMIT = new SmartNumber("Velocity Limit", 0);
         SmartNumber ACC_LIMIT = new SmartNumber("Acceleration Limit",0);
 
