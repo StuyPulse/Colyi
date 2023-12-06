@@ -23,7 +23,7 @@ public class RobotContainer {
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
     
     // Subsystem
-    ElevatorVisualizer elevator = new ElevatorVisualizer();
+    ElevatorVisualizer elevatorVisualizer = new ElevatorVisualizer();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -56,7 +56,6 @@ public class RobotContainer {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
 
         SmartDashboard.putData("Autonomous", autonChooser);
-        // SmartDashboard.putData("elevator", elevator);
     }
 
     public Command getAutonomousCommand() {

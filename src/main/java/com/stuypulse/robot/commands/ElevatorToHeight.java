@@ -1,18 +1,18 @@
 package com.stuypulse.robot.commands;
 
-import com.stuypulse.robot.subsystems.Elevator;
+import com.stuypulse.robot.subsystems.ElevatorImpl;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static com.stuypulse.robot.constants.Settings.Elevator.*;
 
 public class ElevatorToHeight extends CommandBase {
-    private final Elevator elevator;
+    private final ElevatorImpl elevator;
     private final double height; 
 
     private boolean instant;
 
-    public ElevatorToHeight(Elevator elevator, double height) {
+    public ElevatorToHeight(ElevatorImpl elevator, double height) {
         this.elevator = elevator;
         this.height = height;
 

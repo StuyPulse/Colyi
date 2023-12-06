@@ -15,6 +15,10 @@ import com.stuypulse.stuylib.network.SmartNumber;
  */
 public interface Settings {
     public interface Elevator {
+        double GEARING = 0.0;
+        double CARRIAGE_MASS = 0.0; // kg
+        double DRUM_RADIUS = 0.0; // meters
+
         double MIN_HEIGHT = 0.0;
         double MAX_HEIGHT = 0.0;
 

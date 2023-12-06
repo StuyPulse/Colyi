@@ -7,6 +7,11 @@
       "/SmartDashboard/Elevator": "Mechanism2d"
     },
     "windows": {
+      "/SmartDashboard/Autonomous": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Elevator": {
         "window": {
           "visible": true
@@ -26,5 +31,8 @@
         "open": true
       }
     }
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

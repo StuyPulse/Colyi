@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 
 public class ElevatorVisualizer {
@@ -40,9 +39,15 @@ public class ElevatorVisualizer {
     private Color8Bit white = new Color8Bit(255,255,255);
     private Color8Bit blue = new Color8Bit(0, 0, 255);
     private Color8Bit red = new Color8Bit(255, 0, 0);
+
+    //max height
+    private double maxOuterHeight;
+    private double maxInnerHeight;
     
     public ElevatorVisualizer() {
         elevator = new Mechanism2d(10,8); //width x height  //30 x 46 
+        maxOuterHeight = 16; //how much bottom travels 
+        maxInnerHeight = 36; //how much bottom travels 
 
         // root nodes
         
@@ -95,5 +100,11 @@ public class ElevatorVisualizer {
         secondRightBottomRoot.append(secondRightLigament);
 
         SmartDashboard.putData("Elevator", elevator);
+    }
+
+    public void setTargetHeight(double height) {
+        //outer
+        // int double percentdone = 
+        //inner
     }
 }
