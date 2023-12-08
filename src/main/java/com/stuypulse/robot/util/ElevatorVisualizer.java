@@ -1,5 +1,7 @@
 package com.stuypulse.robot.util;
 
+import static com.stuypulse.robot.constants.Settings.Elevator.*;
+
 import com.stuypulse.stuylib.network.SmartNumber;
 
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
@@ -37,11 +39,11 @@ public class ElevatorVisualizer {
     private MechanismRoot2d secondRightBottomRoot;
     private MechanismRoot2d secondTopRoot;
 
-    private SmartNumber height;
-    private SmartNumber width;
+    private double height;
+    private double width;
 
-    private double leftRootx;
-    private double rightRootx;
+    private double leftRootX;
+    private double rightRootX;
     
     // colors
     private Color8Bit white = new Color8Bit(255,255,255);
@@ -51,52 +53,61 @@ public class ElevatorVisualizer {
     //max height
     private double maxOuterHeight;
     private double maxInnerHeight;
+
+    // increments
+    double xincrement = 0.2;
+    double yincrement = 0.15;//0.5;
     
     public ElevatorVisualizer() {
         maxOuterHeight = 16; //how much bottom travels 
         maxInnerHeight = 36; //how much bottom travels 
-        width = new SmartNumber("Elevator/width", 10);
-        height = new SmartNumber("Elevator/height", 8);
-        double xincrement = 0.2;
-        double yincrement = 0.5;
+
+        width = 10;
+        height = 8; 
+        SmartDashboard.putNumber("Elevator/width", width);
+        SmartDashboard.putNumber("Elevator/height", height);
+        // width = new SmartNumber("Elevator/width", 10);
+        // height = new SmartNumber("Elevator/height", 8);
+
         double xfromorigin = 3; //where we start elevator 
-        leftRootx = xfromorigin;
-        rightRootx = width.getAsDouble()-xfromorigin;
-        elevator = new Mechanism2d(width.getAsDouble(),height.getAsDouble()); //width x height  //10 x 8
+
+        leftRootX = xfromorigin;
+        rightRootX = width-xfromorigin;
+        elevator = new Mechanism2d(width,height); //width x height  //10 x 8
 
         // root nodes
         
         //outer shell
-        leftRoot = elevator.getRoot("left root", leftRootx,0);
-        rightRoot = elevator.getRoot("right root", rightRootx,0);
+        leftRoot = elevator.getRoot("left root", leftRootX,0);
+        rightRoot = elevator.getRoot("right root", rightRootX,0);
 
         //first stage 
-        firstLeftBottomRoot = elevator.getRoot("first left bottom root", leftRootx+xincrement,0); //3.2
-        firstRightBottomRoot = elevator.getRoot("first right bottom root", rightRootx-xincrement,0); //6.8
-        firstTopRoot = elevator.getRoot("first top root", leftRootx+xincrement,height.getAsDouble()-yincrement); //3.2,6.5
+        firstLeftBottomRoot = elevator.getRoot("first left bottom root", leftRootX+xincrement,0); //3.2
+        firstRightBottomRoot = elevator.getRoot("first right bottom root", rightRootX-xincrement,0); //6.8
+        firstTopRoot = elevator.getRoot("first top root", leftRootX+xincrement, height-xincrement*6); //3.2,6.5
         
         //second stage
-        secondLeftBottomRoot = elevator.getRoot("second left bottom root", leftRootx+2*xincrement,yincrement); //3.4 .5
-        secondRightBottomRoot = elevator.getRoot("second right bottom root", rightRootx-2*xincrement,yincrement); //6.6 .5
-        secondTopRoot = elevator.getRoot("second top root", leftRootx+2*xincrement,yincrement*4); //3.4 2
+        secondLeftBottomRoot = elevator.getRoot("second left bottom root", leftRootX+2*xincrement,yincrement); //3.4 .5
+        secondRightBottomRoot = elevator.getRoot("second right bottom root", rightRootX-2*xincrement,yincrement); //6.6 .5
+        secondTopRoot = elevator.getRoot("second top root", leftRootX+2*xincrement,leftRootX/2+yincrement); //3.4 2 //leftRootx/2 is the distance from bottom to top of carriage 
         
         // ligaments
 
         //outer shell
-        rightLigament = new MechanismLigament2d("right ligament", rightRootx, 90, 8, red); //7
-        leftLigament = new MechanismLigament2d("left ligament", rightRootx, 90, 8, red); //7
+        rightLigament = new MechanismLigament2d("right ligament", rightRootX, 90, 8, red); //7
+        leftLigament = new MechanismLigament2d("left ligament", rightRootX, 90, 8, red); //7
 
         // first stage
-        firstTopLigament = new MechanismLigament2d("elevator top ligament first", leftRootx+3*xincrement, 0,8,blue); //3.6
-        firstBottomLigament = new MechanismLigament2d("elevator bottom ligament first", leftRootx+3*xincrement, 0,8,blue); //3.6
-        firstLeftLigament = new MechanismLigament2d("elevator left ligament first",rightRootx-xincrement,90, 8, blue); //6.5
-        firstRightLigament = new MechanismLigament2d("elevator right ligament first",rightRootx-xincrement, 90, 8, blue); //6.5
+        firstTopLigament = new MechanismLigament2d("elevator top ligament first", leftRootX+3*xincrement, 0,8,blue); //3.6
+        firstBottomLigament = new MechanismLigament2d("elevator bottom ligament first", leftRootX+3*xincrement, 0,8,blue); //3.6
+        firstLeftLigament = new MechanismLigament2d("elevator left ligament first",rightRootX-xincrement,90, 8, blue); //6.5
+        firstRightLigament = new MechanismLigament2d("elevator right ligament first",rightRootX-xincrement, 90, 8, blue); //6.5
         
         // second stage
-        secondTopLigament = new MechanismLigament2d("elevator top ligament second", leftRootx+xincrement, 0,8, white); //3.2
-        secondBottomLigament = new MechanismLigament2d("elevator bottom ligament second", leftRootx+xincrement, 0,8,white); //3.2
-        secondLeftLigament = new MechanismLigament2d("elevator left ligament second", leftRootx/2, 90,8,white); //1.5
-        secondRightLigament = new MechanismLigament2d("elevator right ligament second", leftRootx/2, 90,8,white); //1.5
+        secondTopLigament = new MechanismLigament2d("elevator top ligament second", leftRootX+xincrement, 0,8, white); //3.2
+        secondBottomLigament = new MechanismLigament2d("elevator bottom ligament second", leftRootX+xincrement, 0,8,white); //3.2
+        secondLeftLigament = new MechanismLigament2d("elevator left ligament second", leftRootX/2, 90,8,white); //1.5
+        secondRightLigament = new MechanismLigament2d("elevator right ligament second", leftRootX/2, 90,8,white); //1.5
 
         //outer shell
         leftRoot.append(leftLigament);
@@ -120,9 +131,27 @@ public class ElevatorVisualizer {
         SmartDashboard.putNumber("Elevator/starting x", xfromorigin);
     }
 
-    public void setTargetHeight(double height) {
+    public void setTargetHeight(double newHeight) {
+        double changeInHeight = newHeight-height;
+        // double percentDone = height / MAX_HEIGHT;
+
         //outer
-        // int double percentdone = 
+        firstLeftBottomRoot.setPosition(leftRootX + xincrement, changeInHeight);
+        firstRightBottomRoot.setPosition(rightRootX - xincrement, changeInHeight);
+        firstTopRoot.setPosition(leftRootX + xincrement, changeInHeight + (rightRootX- xincrement)); //offset of former legnth of ligament which was former height 
+
         //inner
+        secondLeftBottomRoot.setPosition(leftRootX+2*xincrement, changeInHeight);
+        secondRightBottomRoot.setPosition(rightRootX-2*xincrement,changeInHeight);
+        secondTopRoot.setPosition(leftRootX+2*xincrement,leftRootX/2+changeInHeight); //former height + change
+
+        /*
+        THE FACTS:
+        - carriage moves at the same speed RELATIVE to teh inner stage
+        - carriage moves at twice the speed of the inner stage releative to teh observer
+         (use twice the speed for observer since we have them as separate from each other)
+
+        - carriage not connected to inner stage
+        - carria*/
     }
 }

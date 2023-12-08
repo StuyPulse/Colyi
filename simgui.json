@@ -23,16 +23,22 @@
     "transitory": {
       "SmartDashboard": {
         "Elevator": {
-          "left root": {
+          "first top root": {
             "open": true
           },
-          "open": true
+          "open": true,
+          "right root": {
+            "open": true
+          },
+          "second left bottom root": {
+            "elevator bottom ligament second": {
+              "open": true
+            },
+            "open": true
+          }
         },
         "open": true
       }
     }
-  },
-  "NetworkTables View": {
-    "visible": false
   }
 }
