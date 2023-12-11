@@ -7,6 +7,8 @@ package com.stuypulse.robot.constants;
 
 import com.stuypulse.stuylib.network.SmartNumber;
 
+import edu.wpi.first.math.util.Units;
+
 /*-
  * File containing tunable settings for every subsystem on the robot.
  *
@@ -15,17 +17,17 @@ import com.stuypulse.stuylib.network.SmartNumber;
  */
 public interface Settings {
     public interface Elevator {
-        double GEARING = 0.0;
-        double CARRIAGE_MASS = 0.0; // kg
-        double DRUM_RADIUS = 0.0; // meters
+        double GEARING = 1;
+        double CARRIAGE_MASS = 15; // kg
+        double DRUM_RADIUS = Units.inchesToMeters(1); // meters
 
-        double MIN_HEIGHT = 0.0;
-        double MAX_HEIGHT = 0.0;
+        double MIN_HEIGHT = 0.1;
+        double MAX_HEIGHT = 1.5;
 
-        double MAX_HEIGHT_ERROR = 0.0;
+        double MAX_HEIGHT_ERROR = 0.03;
 
-        SmartNumber VEL_LIMIT = new SmartNumber("Velocity Limit", 0);
-        SmartNumber ACC_LIMIT = new SmartNumber("Acceleration Limit",0);
+        SmartNumber VEL_LIMIT = new SmartNumber("Velocity Limit", 3);
+        SmartNumber ACC_LIMIT = new SmartNumber("Acceleration Limit", 2);
 
         public interface Encoder {
             double ENCODER_MULTIPLIER = 1;

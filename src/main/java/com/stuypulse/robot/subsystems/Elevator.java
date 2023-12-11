@@ -60,4 +60,9 @@ public abstract class Elevator extends SubsystemBase {
 
     public abstract double getVelocity();
     public abstract double getHeight();
+
+    @Override
+    public void periodic() {
+        elevatorVisualizer.setHeight(getHeight());
+    }
 }
