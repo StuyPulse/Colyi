@@ -12,6 +12,7 @@ import com.stuypulse.stuylib.network.SmartNumber;
 import com.stuypulse.stuylib.streams.filters.MotionProfile;
 
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class Elevator extends SubsystemBase {
@@ -63,6 +64,6 @@ public abstract class Elevator extends SubsystemBase {
 
     @Override
     public void periodic() {
-        elevatorVisualizer.setHeight(getHeight());
+        elevatorVisualizer.setHeight(targetHeight.getAsDouble());
     }
 }

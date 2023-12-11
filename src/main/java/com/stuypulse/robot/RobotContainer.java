@@ -5,14 +5,17 @@
 
 package com.stuypulse.robot;
 
+import com.stuypulse.robot.commands.ElevatorDrive;
+import com.stuypulse.robot.commands.ElevatorToBottom;
+import com.stuypulse.robot.commands.ElevatorToHeight;
+import com.stuypulse.robot.commands.ElevatorToTop;
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.Elevator;
-import com.stuypulse.robot.util.ElevatorVisualizer;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
+import com.stuypulse.stuylib.input.gamepads.Xbox;
 
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,7 +24,7 @@ public class RobotContainer {
 
     // Gamepads
     public final Gamepad driver = new AutoGamepad(Ports.Gamepad.DRIVER);
-    public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
+    public final Gamepad operator = new Xbox(Ports.Gamepad.OPERATOR);
     
     // Subsystem
     Elevator elevator = Elevator.getInstance();
@@ -35,13 +38,17 @@ public class RobotContainer {
         configureDefaultCommands();
         configureButtonBindings();
         configureAutons();
+
+        SmartDashboard.putData("Gamepads/Operator", driver);
     }
 
     /****************/
     /*** DEFAULTS ***/
     /****************/
 
-    private void configureDefaultCommands() {}
+    private void configureDefaultCommands() {
+        elevator.setDefaultCommand(new ElevatorDrive(driver));
+    }
 
     /***************/
     /*** BUTTONS ***/
@@ -55,6 +62,9 @@ public class RobotContainer {
 
     public void configureAutons() {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
+        autonChooser.addOption("Elevator To Bottom", new ElevatorToBottom());
+        autonChooser.addOption("Elevator To Top", new ElevatorToTop());
+        autonChooser.addOption("Elevator To Height",new ElevatorToHeight(1.2));
 
         SmartDashboard.putData("Autonomous", autonChooser);
     }

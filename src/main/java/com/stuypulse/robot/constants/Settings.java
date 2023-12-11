@@ -17,9 +17,10 @@ import edu.wpi.first.math.util.Units;
  */
 public interface Settings {
     public interface Elevator {
+        double DT = 0.3; //time between each simulation update
         double GEARING = 1;
         double CARRIAGE_MASS = 15; // kg
-        double DRUM_RADIUS = Units.inchesToMeters(1); // meters
+        double DRUM_RADIUS = 0.025; // meters
 
         double MIN_HEIGHT = 0.1;
         double MAX_HEIGHT = 1.5;

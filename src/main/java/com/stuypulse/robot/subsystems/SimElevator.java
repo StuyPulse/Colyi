@@ -26,4 +26,12 @@ public class SimElevator extends Elevator {
     public double getHeight() {
         return sim.getPositionMeters();
     }
+
+    @Override
+    public void simulationPeriodic() {
+        sim.update(DT);
+        
+        height = sim.getPositionMeters();
+        velocity = sim.getVelocityMetersPerSecond();
+    }
 }
