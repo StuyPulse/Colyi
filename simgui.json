@@ -30,6 +30,9 @@
             }
           }
         },
+        "Gamepads": {
+          "open": true
+        },
         "open": true
       }
     }

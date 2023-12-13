@@ -13,7 +13,6 @@ public class SimElevator extends Elevator {
     public SimElevator() {
         height = 0.0;
         velocity = 0.0;
-
         sim = new ElevatorSim(DCMotor.getNEO(2), GEARING,  CARRIAGE_MASS, DRUM_RADIUS, MIN_HEIGHT, MAX_HEIGHT, true);
     }
 
