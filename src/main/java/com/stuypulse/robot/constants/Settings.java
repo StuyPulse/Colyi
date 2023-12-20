@@ -16,12 +16,12 @@ import com.stuypulse.stuylib.network.SmartNumber;
 public interface Settings {
     public interface Elevator {
         double DT = 0.3; // time between each simulation update
-        double GEARING = 1;
-        double CARRIAGE_MASS = 15; // kg
+        double GEARING = 9; // ~9:1
+        double CARRIAGE_MASS = 10; // kg
         double DRUM_RADIUS = 0.025; // meters 
 
         double MIN_HEIGHT = 0;
-        double MAX_HEIGHT = 1.1;
+        double MAX_HEIGHT = 1.8475325; // meters 
 
         double MAX_HEIGHT_ERROR = 0.03;
 

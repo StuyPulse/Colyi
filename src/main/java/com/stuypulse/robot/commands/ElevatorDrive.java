@@ -8,6 +8,8 @@ import com.stuypulse.stuylib.streams.IStream;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import static com.stuypulse.robot.constants.Settings.Elevator.*;
+
 public class ElevatorDrive extends CommandBase {
     private final Elevator elevator;
     private IStream velocity;
@@ -22,8 +24,8 @@ public class ElevatorDrive extends CommandBase {
 
     @Override
     public void execute() {
-        elevator.setTargetHeight(velocity.get());
-        SmartDashboard.putNumber("Gamepad velocity", velocity.getAsDouble());
+        elevator.setTargetHeight(velocity.get() * MAX_HEIGHT);
+        SmartDashboard.putNumber("Gamepad Velocity", velocity.getAsDouble());
     }
 
     @Override

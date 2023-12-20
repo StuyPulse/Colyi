@@ -3,6 +3,7 @@ package com.stuypulse.robot.subsystems;
 import static com.stuypulse.robot.constants.Settings.Elevator.*;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SimElevator extends Elevator {
     private ElevatorSim sim;
@@ -32,5 +33,7 @@ public class SimElevator extends Elevator {
         
         height = sim.getPositionMeters();
         velocity = sim.getVelocityMetersPerSecond();
+
+        SmartDashboard.putNumber("Height", getHeight());
     }
 }

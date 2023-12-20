@@ -135,14 +135,5 @@ public class ElevatorVisualizer {
         secondLeftBottomRoot.setPosition(leftRootX + 2 * STAGE_SPACING, secondStageBottomY);
         secondRightBottomRoot.setPosition(rightRootX - 2 * STAGE_SPACING, secondStageBottomY);
         secondTopRoot.setPosition(leftRootX + 2 * STAGE_SPACING, INNER_STAGE_HEIGHT + secondStageBottomY);
-
-        /*
-        THE FACTS:
-        - carriage moves at the same speed RELATIVE to teh inner stage
-        - carriage moves at twice the speed of the inner stage releative to teh observer
-         (use twice the speed for observer since we have them as separate from each other)
-
-        - carriage not connected to inner stage
-        - carria*/
     }
 }
