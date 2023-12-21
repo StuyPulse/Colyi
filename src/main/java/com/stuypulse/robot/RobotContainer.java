@@ -47,7 +47,6 @@ public class RobotContainer {
     /****************/
 
     private void configureDefaultCommands() {
-        elevator.setDefaultCommand(new ElevatorDrive(driver));
     }
 
     /***************/
