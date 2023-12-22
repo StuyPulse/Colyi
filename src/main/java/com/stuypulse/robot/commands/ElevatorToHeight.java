@@ -34,7 +34,7 @@ public class ElevatorToHeight extends CommandBase {
     @Override
     public boolean isFinished() {
         if (!instant) {
-            elevator.isReady(MAX_HEIGHT_ERROR);
+            return elevator.isReady(MAX_HEIGHT_ERROR);
         }
         return true;
     }

@@ -15,7 +15,7 @@ import com.stuypulse.stuylib.network.SmartNumber;
  */
 public interface Settings {
     public interface Elevator {
-        double DT = 0.3; // time between each simulation update
+        double DT = 0.02; // time between each simulation update
         double GEARING = 9; // ~9:1
         double CARRIAGE_MASS = 10; // kg
         double DRUM_RADIUS = 0.025; // meters 
@@ -34,15 +34,15 @@ public interface Settings {
     }
 
     public interface PID {
-        SmartNumber kP = new SmartNumber("kP", 0);
-        SmartNumber kI = new SmartNumber("kI", 0);
+        SmartNumber kP = new SmartNumber("kP", 3);
+        SmartNumber kI = new SmartNumber("kI", 0.5);
         SmartNumber kD = new SmartNumber("kD", 0);
     }
 
     public interface FeedForward {
-        SmartNumber kG = new SmartNumber("kG", 0);
-        SmartNumber kS = new SmartNumber("kS", 0);
-        SmartNumber kV = new SmartNumber("kV", 0);
-        SmartNumber kA = new SmartNumber("kA", 0);
+        SmartNumber kG = new SmartNumber("kG", 5.0);
+        SmartNumber kS = new SmartNumber("kS", 0.5);
+        SmartNumber kV = new SmartNumber("kV", 5.0);
+        SmartNumber kA = new SmartNumber("kA", 0.1);
     }
 }

@@ -17,14 +17,15 @@ public class ElevatorDrive extends CommandBase {
     public ElevatorDrive(Gamepad gamepad) {
         elevator = Elevator.getInstance();
 
-        velocity = IStream.create(gamepad::getLeftY); // left Y is elevator in controls 
+        velocity = IStream.create(gamepad::getLeftY)
+            .filtered(x -> x * VEL_LIMIT.get()); // left Y is elevator in controls 
 
         addRequirements(elevator);
     }
 
     @Override
     public void execute() {
-        elevator.setTargetHeight(velocity.get() * MAX_HEIGHT);
+        elevator.setTargetHeight(elevator.getHeight() + velocity.get());
         SmartDashboard.putNumber("Gamepad Velocity", velocity.getAsDouble());
     }
 

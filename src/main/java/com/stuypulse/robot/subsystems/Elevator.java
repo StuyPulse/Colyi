@@ -52,7 +52,9 @@ public abstract class Elevator extends SubsystemBase {
     }
 
     public void setTargetHeight(double height) {
-        targetHeight.set(height);
+        if (height < MAX_HEIGHT && height > MIN_HEIGHT) {
+            targetHeight.set(height);
+        }
     }
 
     public final boolean isReady(double error) {
@@ -61,11 +63,16 @@ public abstract class Elevator extends SubsystemBase {
 
     public abstract double getVelocity();
     public abstract double getHeight();
+    public abstract void setVoltage(double voltage);
 
     @Override
     public void periodic() {
-        if (targetHeight.getAsDouble() >= MIN_HEIGHT) {
-            elevatorVisualizer.setHeight(targetHeight.getAsDouble());
+        setVoltage(position.update(targetHeight.getAsDouble(), getHeight()));
+
+        if (getHeight() >= MIN_HEIGHT) {
+            elevatorVisualizer.setHeight(getHeight());
         }
+
+        SmartDashboard.putBoolean("Is Ready", isReady(MAX_HEIGHT_ERROR));
     }
 }

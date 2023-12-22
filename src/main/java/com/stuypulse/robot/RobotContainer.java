@@ -47,13 +47,17 @@ public class RobotContainer {
     /****************/
 
     private void configureDefaultCommands() {
+        elevator.setDefaultCommand(new ElevatorDrive(driver));
     }
 
     /***************/
     /*** BUTTONS ***/
     /***************/
 
-    private void configureButtonBindings() {}
+    private void configureButtonBindings() {
+        // driver.getLeftStickUp()
+        //     .whileTrue(new ElevatorDrive(driver));
+    }
 
     /**************/
     /*** AUTONS ***/
@@ -61,9 +65,9 @@ public class RobotContainer {
 
     public void configureAutons() {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
-        autonChooser.addOption("Elevator To Bottom", new ElevatorToBottom());
-        autonChooser.addOption("Elevator To Top", new ElevatorToTop());
-        autonChooser.addOption("Elevator To Height",new ElevatorToHeight(1.2));
+        autonChooser.addOption("Elevator To Bottom", new ElevatorToBottom().untilReady());
+        autonChooser.addOption("Elevator To Top", new ElevatorToTop().untilReady());
+        autonChooser.addOption("Elevator To Height", new ElevatorToHeight(1.2).untilReady());
 
         SmartDashboard.putData("Autonomous", autonChooser);
     }

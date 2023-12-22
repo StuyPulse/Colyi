@@ -54,6 +54,7 @@ public class ElevatorImpl extends Elevator {
         return (leftEncoder.getPosition() + rightEncoder.getPosition()) / 2 * ENCODER_MULTIPLIER;
     }
 
+    @Override
     public void setVoltage(double voltage) {
         if (atTop() && voltage > 0) {
             DriverStation.reportWarning("Top Limit Reached", false);
