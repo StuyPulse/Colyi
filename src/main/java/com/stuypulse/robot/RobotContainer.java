@@ -67,8 +67,7 @@ public class RobotContainer {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
         autonChooser.addOption("Elevator To Bottom", new ElevatorToBottom().untilReady());
         autonChooser.addOption("Elevator To Top", new ElevatorToTop().untilReady());
-        autonChooser.addOption("Elevator To Height", new ElevatorToHeight(1.2).untilReady());
-
+    
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 
