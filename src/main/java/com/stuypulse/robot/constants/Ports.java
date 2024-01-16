@@ -14,8 +14,7 @@ public interface Ports {
     }
 
     public interface Elevator {
-        int LEFT = 0;
-        int RIGHT = 0;
+        int MOTOR = 0;
 
         int TOP_LIMIT_SWITCH = 0;
         int BOTTOM_LIMIT_SWITCH = 0;
