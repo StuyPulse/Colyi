@@ -7,6 +7,8 @@ package com.stuypulse.robot.constants;
 
 import com.stuypulse.stuylib.network.SmartNumber;
 
+import edu.wpi.first.math.util.Units;
+
 /*-
  * File containing tunable settings for every subsystem on the robot.
  *
@@ -22,6 +24,8 @@ public interface Settings {
 
         double MIN_HEIGHT = 0;
         double MAX_HEIGHT = 1.8475325; // meters 
+        double TRAP_HEIGHT = 1.5; // placeholder
+        double AMP_HEIGHT = 1.25; // placeholder
 
         double MAX_HEIGHT_ERROR = 0.03;
 
@@ -30,6 +34,9 @@ public interface Settings {
 
         public interface Encoder {
             double ENCODER_MULTIPLIER = 1;
+            double GEAR_RATIO = 1.0 / 20.0; //added
+            double WINCH_CIRCUMFERENCE = Math.PI * Units.inchesToMeters(1.25);
+            double ENCODER_RATIO = GEAR_RATIO * WINCH_CIRCUMFERENCE;
         }
     }
 

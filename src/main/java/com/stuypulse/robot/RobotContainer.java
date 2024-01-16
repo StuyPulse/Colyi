@@ -5,11 +5,11 @@
 
 package com.stuypulse.robot;
 
-import com.stuypulse.robot.commands.ElevatorDrive;
-import com.stuypulse.robot.commands.ElevatorToBottom;
-import com.stuypulse.robot.commands.ElevatorToHeight;
-import com.stuypulse.robot.commands.ElevatorToTop;
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
+import com.stuypulse.robot.commands.elevator.ElevatorDrive;
+import com.stuypulse.robot.commands.elevator.ElevatorToBottom;
+import com.stuypulse.robot.commands.elevator.ElevatorToHeight;
+import com.stuypulse.robot.commands.elevator.ElevatorToTop;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.Elevator;
 import com.stuypulse.stuylib.input.Gamepad;
@@ -67,8 +67,7 @@ public class RobotContainer {
         autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
         autonChooser.addOption("Elevator To Bottom", new ElevatorToBottom().untilReady());
         autonChooser.addOption("Elevator To Top", new ElevatorToTop().untilReady());
-        autonChooser.addOption("Elevator To Height", new ElevatorToHeight(1.2).untilReady());
-
+    
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 

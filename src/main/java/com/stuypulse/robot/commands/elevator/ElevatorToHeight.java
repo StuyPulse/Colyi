@@ -1,4 +1,4 @@
-package com.stuypulse.robot.commands;
+package com.stuypulse.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

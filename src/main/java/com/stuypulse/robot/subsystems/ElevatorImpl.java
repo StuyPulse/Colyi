@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.constants.Settings.Elevator.Encoder;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,21 +16,24 @@ public class ElevatorImpl extends Elevator {
     // hardware
     public CANSparkMax leftMotor;
     public CANSparkMax rightMotor;
+    public CANSparkMax motor;
 
     public RelativeEncoder leftEncoder;
     public RelativeEncoder rightEncoder;
+    public RelativeEncoder encoder;
 
     public DigitalInput topLimit;
     public DigitalInput bottomLimit;
 
     public ElevatorImpl() {
-        // motors
-        leftMotor = new CANSparkMax(Ports.Elevator.LEFT, MotorType.kBrushless);
-        rightMotor = new CANSparkMax(Ports.Elevator.RIGHT, MotorType.kBrushless);
 
-        // encoders
-        leftEncoder = leftMotor.getEncoder();
-        rightEncoder = rightMotor.getEncoder();
+        // motors
+        motor = new CANSparkMax(Ports.Elevator.MOTOR, MotorType.kBrushless);
+        
+        encoder = motor.getEncoder();
+        encoder.setPositionConversionFactor(Encoder.ENCODER_RATIO);
+        encoder.setVelocityConversionFactor(Encoder.ENCODER_RATIO / 60.0);
+
         
         // limit switches
         topLimit = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
@@ -46,12 +50,12 @@ public class ElevatorImpl extends Elevator {
 
     @Override
     public double getVelocity() { // average of the two? 
-        return (rightEncoder.getVelocity() + leftEncoder.getVelocity()) / 2 * ENCODER_MULTIPLIER;
+        return encoder.getVelocity() * ENCODER_MULTIPLIER;
     }
 
     @Override
     public double getHeight() {
-        return (leftEncoder.getPosition() + rightEncoder.getPosition()) / 2 * ENCODER_MULTIPLIER;
+        return encoder.getPosition() * ENCODER_MULTIPLIER;
     }
 
     @Override
@@ -61,19 +65,16 @@ public class ElevatorImpl extends Elevator {
             
             voltage = 0.0;
             
-            leftEncoder.setPosition(MAX_HEIGHT);
-            rightEncoder.setPosition(MAX_HEIGHT);
+            encoder.setPosition(MAX_HEIGHT);
         } else if (atBottom() && voltage < 0) {
             DriverStation.reportWarning("Bottom Limit Reached", false);
 
             voltage = 0.0;
-            
-            leftEncoder.setPosition(MIN_HEIGHT);
-            rightEncoder.setPosition(MIN_HEIGHT);
+
+            encoder.setPosition(MIN_HEIGHT);
         }
 
-        rightMotor.setVoltage(voltage);
-        leftMotor.setVoltage(voltage);
+        motor.setVoltage(voltage);
     }
 
     public void addTargetHeight(double delta) {
