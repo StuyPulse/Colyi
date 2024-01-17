@@ -13,13 +13,7 @@ import static com.stuypulse.robot.constants.Settings.Elevator.*;
 import static com.stuypulse.robot.constants.Settings.Elevator.Encoder.*;
 
 public class ElevatorImpl extends Elevator {
-    // hardware
-    public CANSparkMax leftMotor;
-    public CANSparkMax rightMotor;
     public CANSparkMax motor;
-
-    public RelativeEncoder leftEncoder;
-    public RelativeEncoder rightEncoder;
     public RelativeEncoder encoder;
 
     public DigitalInput topLimit;

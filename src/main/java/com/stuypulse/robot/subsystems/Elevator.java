@@ -52,9 +52,7 @@ public abstract class Elevator extends SubsystemBase {
     }
 
     public void setTargetHeight(double height) {
-        if (height < MAX_HEIGHT && height > MIN_HEIGHT) {
-            targetHeight.set(height);
-        }
+        targetHeight.set(height);
     }
 
     public final boolean isReady(double error) {

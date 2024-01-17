@@ -4,11 +4,10 @@
 /**************************************************************/
 
 package com.stuypulse.robot;
-
+ 
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.commands.elevator.ElevatorDrive;
 import com.stuypulse.robot.commands.elevator.ElevatorToBottom;
-import com.stuypulse.robot.commands.elevator.ElevatorToHeight;
 import com.stuypulse.robot.commands.elevator.ElevatorToTop;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.Elevator;
