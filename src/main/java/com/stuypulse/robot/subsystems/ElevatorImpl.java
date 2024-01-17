@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.constants.Settings.Elevator.Encoder;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -23,6 +24,7 @@ public class ElevatorImpl extends Elevator {
 
         // motors
         motor = new CANSparkMax(Ports.Elevator.MOTOR, MotorType.kBrushless);
+        motor.setIdleMode(IdleMode.kBrake);
         
         encoder = motor.getEncoder();
         encoder.setPositionConversionFactor(Encoder.ENCODER_RATIO);

@@ -4,10 +4,12 @@ import static com.stuypulse.robot.constants.Settings.Elevator.*;
 import static com.stuypulse.robot.constants.Settings.FeedForward.kG;
 import static com.stuypulse.robot.constants.Settings.PID.*;
 
+import com.stuypulse.robot.util.ElevatorClimberVisualizer;
 import com.stuypulse.robot.util.ElevatorVisualizer;
 import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.control.feedforward.ElevatorFeedforward;
+import com.stuypulse.stuylib.math.SLMath;
 import com.stuypulse.stuylib.network.SmartNumber;
 import com.stuypulse.stuylib.streams.filters.MotionProfile;
 
@@ -32,7 +34,8 @@ public abstract class Elevator extends SubsystemBase {
     }
 
     // elevator visualizer
-    ElevatorVisualizer elevatorVisualizer = new ElevatorVisualizer();
+    // ElevatorVisualizer elevatorVisualizer = new ElevatorVisualizer();
+    ElevatorClimberVisualizer elevatorClimberVisualizer = new ElevatorClimberVisualizer();
 
     // control
     public Controller position;
@@ -52,11 +55,15 @@ public abstract class Elevator extends SubsystemBase {
     }
 
     public void setTargetHeight(double height) {
-        targetHeight.set(height);
+        targetHeight.set(SLMath.clamp(height, MIN_HEIGHT, MAX_HEIGHT));
     }
 
     public final boolean isReady(double error) {
         return Math.abs(getTargetHeight() - getHeight()) < error;
+    }
+
+    public void setKG(double k) {
+        kG.set(k);
     }
 
     public abstract double getVelocity();
@@ -68,7 +75,7 @@ public abstract class Elevator extends SubsystemBase {
         setVoltage(position.update(targetHeight.getAsDouble(), getHeight()));
 
         if (getHeight() >= MIN_HEIGHT) {
-            elevatorVisualizer.setHeight(getHeight());
+            elevatorClimberVisualizer.setHeight(getHeight());
         }
 
         SmartDashboard.putBoolean("Is Ready", isReady(MAX_HEIGHT_ERROR));
